@@ -5,6 +5,7 @@
 #include<iostream>
 #include<vector>
 #include<algorithm>
+#include<numeric>
 
 void pr_vector(std::vector<int>& v);
 

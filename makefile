@@ -14,7 +14,9 @@ ALGO_obj = \
 all: main.o $(ALGO_obj)
 	$(CC) -o main main.o $(ALGO_obj)
 
-
+run: all
+	@echo "============================================"
+	@./main
 
 
 

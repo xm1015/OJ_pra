@@ -72,3 +72,45 @@ int eraseOverlapIntervals(vector<vector<int>>& intervals) {
 
   return erase_total;
 }
+
+
+// 605.Can Place Flowers
+// bool canPlaceFlowers_V1(vector<int>& flowerbed, int n) {
+//   int planted = 0;
+//   for(int i=0; i < flowerbed.size(); ){
+//     if(flowerbed[i] == 1) // pvot is 1
+//       i += 2;
+//     else if( i == 0 || flowerbed[i-1] == 0){ // behind is 0 or bored
+//       if( i+1 > flowerbed.size()-1 || flowerbed[i+1] == 0){  // front is 0 or bored
+//         flowerbed[i] == 1;
+//         planted++;
+//         i += 2;
+//       }
+//       else{
+//         i += 3;
+//       }
+//     }
+//     else{
+//       i++;
+//     }
+//   }
+//   return n <= planted;
+// }
+bool canPlaceFlowers(vector<int>& flowerbed, int n) {
+
+  for(int i=0; i < flowerbed.size(); ){
+    if(flowerbed[i] == 1) // pvot is 1
+      i += 2;
+    else{
+      if( i+1 > flowerbed.size()-1 || flowerbed[i+1] == 0){  // front is 0 or bored
+        n--;
+        i += 2;
+      }
+      else{ // front is 1
+        i += 3;
+      }
+    }
+  }
+
+  return n < 1;
+}

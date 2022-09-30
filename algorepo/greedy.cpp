@@ -114,3 +114,63 @@ bool canPlaceFlowers(vector<int>& flowerbed, int n) {
 
   return n < 1;
 }
+
+// 452. Minimum Number of Arrows to Burst Balloons
+int findMinArrowShots(vector<vector<int>>& points)
+{
+  if(points.size() < 1)
+    return 0;
+
+  sort(points.begin(), points.end(), \
+  [](vector<int> a, vector<int> b){
+    return a[1] < b[1];
+  });
+
+  int arrows, pos;
+
+  arrows = 1;
+  pos = points[0][1];
+  for(int i=1; i < points.size(); i++){
+    if(points[i][0] > pos){
+      arrows++;
+      pos = points[i][1];
+    }
+  }
+
+  return arrows;
+}
+
+// 763. Partition Labels
+vector<int> partitionLabels(string s) {
+  if(s.length() == 0)
+    return {0};
+
+  int last_pos[26];
+  for(int i=0; i < s.length(); i++){
+    last_pos[s[i] - 'a'] = i;
+  }
+
+  vector<int> res;
+  int head, tail;
+
+  head = tail = 0;
+  for(int i=0; i < s.length(); i++){
+    if( i > tail ){
+      res.push_back(tail - head + 1);
+      head = i;
+    }
+    tail = max(tail, last_pos[s[i] - 'a']);
+  }
+  res.push_back(tail - head + 1);
+
+  return res;
+}
+
+
+
+
+
+
+
+
+

@@ -166,7 +166,16 @@ vector<int> partitionLabels(string s) {
   return res;
 }
 
+// 122. Best Time to Buy and Sell Stock II
+int maxProfit(vector<int>& prices) {
+  int revenu = 0;
+  for(int i = 1; i < prices.size(); i++){
+    revenu += (prices[i] - prices[i-1]) > 0 ? prices[i] - prices[i-1] : 0;
+  }
+  return revenu;
+}
 
+// 
 
 
 

@@ -175,9 +175,30 @@ int maxProfit(vector<int>& prices) {
   return revenu;
 }
 
-// 
+// 406. Queue Reconstruction by Height
+vector<vector<int>> reconstructQueue(vector<vector<int>>& people) {
+    sort(people.begin(), people.end(), \
+    [](vector<int> a, vector<int> b){
+      if(a[0] != b[0]) return a[0] > b[0];
+      if(a[1] != b[1]) return a[1] < b[1];
+      return false;
+    });
 
+    vector<vector<int>> res;
+    // for(int i=people.size()-1; i >= 0; i--){
+    //     res.insert(res.begin()+people[i][1], people[i]);
+    // }
+    pr_vector_2(people);
+    for(int i=0; i < people.size(); i++){
+        res.insert(res.begin()+people[i][1], people[i]);
+    }
+    return res;
+}
 
+void test_406(){
+  vector<vector<int>> people = {{7,0},{4,4},{7,1},{5,0},{6,1},{5,2}};
+  reconstructQueue(people);
+}
 
 
 

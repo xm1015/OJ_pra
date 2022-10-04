@@ -200,7 +200,28 @@ void test_406(){
   reconstructQueue(people);
 }
 
+// 665. Non-decreasing Array
+bool checkPossibility(vector<int>& nums){
+  if(nums.size() < 2)
+    return true;
 
+  int count = 2;
+  for(int i = 1; i < nums.size(); i++){
+    if(nums[i-1] > nums[i]){
+      if(--count <= 0)
+        return false;
+      if(i == 1 || nums[i-2] <= nums[i])  // 严防这里的数组越位！！！
+        nums[i-1] = nums[i];
+      else
+        nums[i] = nums[i-1];
+    }
+  }
+  return true;
+}
+void test_665(){
+  vector<int> a = {4,2,3};
+  checkPossibility(a);
+}
 
 
 

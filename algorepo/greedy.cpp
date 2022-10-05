@@ -1,4 +1,5 @@
 #include "include/algorepo.h"
+#include "include/testcase.h"
 using namespace std;
 
 
@@ -7,7 +8,7 @@ int findContentChildren(vector<int>& g, vector<int>& s) {
     sort(g.begin(), g.end());
     sort(s.begin(), s.end());
     int child = 0, cookie = 0;
-    while (child < g.size() && cookie < s.size()) {
+    while (child < (int)g.size() && cookie < (int)s.size()) {
         if (g[child] <= s[cookie++])
             ++child;
     }
@@ -25,18 +26,19 @@ int test_455()
 
 // 135.Candy
 int candy(vector<int>& ratings) {
-    if(ratings.size() < 1)
+    int child_n = ratings.size();
+    if(child_n < 1)
         return 0;
-    else if(ratings.size() == 1)
+    else if(child_n == 1)
         return 1;
 
-    vector<int> cookies(ratings.size(), 1);
-    for (int i=1; i < ratings.size(); i++) {
+    vector<int> cookies(child_n, 1);
+    for (int i=1; i < child_n; i++) {
         if ( ratings[i] > ratings[i-1] )
             cookies[i] = cookies[i-1] + 1;
     }
     //pr_vector(cookies);
-    for (int i=ratings.size()-2; i >= 0; i--) {
+    for (int i=child_n-2; i >= 0; i--) {
         if ( ratings[i] > ratings[i+1])
             cookies[i] = max( cookies[i+1] + 1, cookies[i]);
     }
@@ -63,7 +65,7 @@ int eraseOverlapIntervals(vector<vector<int>>& intervals) {
 
   int erase_total = 0;
   int pivot = intervals[0][1];
-  for(int i = 1; i < intervals.size(); i++){
+  for(int i = 1; i < (int)intervals.size(); i++){
     if(intervals[i][0] >= pivot)
       pivot = intervals[i][1];
     else
@@ -98,11 +100,11 @@ int eraseOverlapIntervals(vector<vector<int>>& intervals) {
 // }
 bool canPlaceFlowers(vector<int>& flowerbed, int n) {
 
-  for(int i=0; i < flowerbed.size(); ){
+  for(int i=0; i < (int)flowerbed.size(); ){
     if(flowerbed[i] == 1) // pvot is 1
       i += 2;
     else{
-      if( i+1 > flowerbed.size()-1 || flowerbed[i+1] == 0){  // front is 0 or bored
+      if( i+1 > (int)flowerbed.size()-1 || flowerbed[i+1] == 0){  // front is 0 or bored
         n--;
         i += 2;
       }
@@ -130,7 +132,7 @@ int findMinArrowShots(vector<vector<int>>& points)
 
   arrows = 1;
   pos = points[0][1];
-  for(int i=1; i < points.size(); i++){
+  for(int i=1; i < (int)points.size(); i++){
     if(points[i][0] > pos){
       arrows++;
       pos = points[i][1];
@@ -146,7 +148,7 @@ vector<int> partitionLabels(string s) {
     return {0};
 
   int last_pos[26];
-  for(int i=0; i < s.length(); i++){
+  for(int i=0; i < (int)s.length(); i++){
     last_pos[s[i] - 'a'] = i;
   }
 
@@ -154,7 +156,7 @@ vector<int> partitionLabels(string s) {
   int head, tail;
 
   head = tail = 0;
-  for(int i=0; i < s.length(); i++){
+  for(int i=0; i < (int)s.length(); i++){
     if( i > tail ){
       res.push_back(tail - head + 1);
       head = i;
@@ -169,7 +171,7 @@ vector<int> partitionLabels(string s) {
 // 122. Best Time to Buy and Sell Stock II
 int maxProfit(vector<int>& prices) {
   int revenu = 0;
-  for(int i = 1; i < prices.size(); i++){
+  for(int i = 1; i < (int)prices.size(); i++){
     revenu += (prices[i] - prices[i-1]) > 0 ? prices[i] - prices[i-1] : 0;
   }
   return revenu;
@@ -189,7 +191,7 @@ vector<vector<int>> reconstructQueue(vector<vector<int>>& people) {
     //     res.insert(res.begin()+people[i][1], people[i]);
     // }
     pr_vector_2(people);
-    for(int i=0; i < people.size(); i++){
+    for(int i=0; i < (int)people.size(); i++){
         res.insert(res.begin()+people[i][1], people[i]);
     }
     return res;
@@ -206,7 +208,7 @@ bool checkPossibility(vector<int>& nums){
     return true;
 
   int count = 2;
-  for(int i = 1; i < nums.size(); i++){
+  for(uint i = 1; i < nums.size(); i++){
     if(nums[i-1] > nums[i]){
       if(--count <= 0)
         return false;

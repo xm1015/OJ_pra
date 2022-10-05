@@ -7,6 +7,7 @@ CPPFLAGS = -Wall -g
 
 ALGO_obj = \
 	$(AL_dir)/greedy.o \
+	$(AL_dir)/doublePointer.c \
 	$(AL_dir)/dp.o \
 	$(AL_dir)/funcs.o \
 
@@ -17,8 +18,6 @@ all: main.o $(ALGO_obj)
 run: all
 	@echo "============================================"
 	@./main
-
-
 
 
 install:

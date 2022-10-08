@@ -36,6 +36,34 @@ vector<int> twoSum_V2(vector<int>& numbers, int target){
   return vector<int>{i+1, j+1};
 }
 
+
+// 88. Merge Sorted Array
+ListNode *detecCycle(ListNode *head){
+  ListNode *fast, *slow;
+  fast = slow = head;
+
+  while(fast != NULL && fast->next != NULL){
+    fast = fast->next->next;
+    slow = slow->next;
+
+    if(fast == slow){
+      fast = head;
+      while(fast != slow){
+        fast = fast->next;
+        slow = slow->next;
+      }
+      return fast;
+    }
+  }
+
+  return NULL;
+}
+
+
+// 142. Linked List Cycle II
+
+
+
 // 76. Minimum Window Substring
 string minWindow(string s, string t){
   vector<int> chars(128, 0);

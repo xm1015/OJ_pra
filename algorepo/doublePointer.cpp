@@ -35,3 +35,46 @@ vector<int> twoSum_V2(vector<int>& numbers, int target){
 
   return vector<int>{i+1, j+1};
 }
+
+// 76. Minimum Window Substring
+string minWindow(string s, string t){
+  vector<int> chars(128, 0);
+  vector<bool> flags(128, false);
+
+  // 
+  for(int i=0; i<t.size(); i++){
+    flags[t[i]] = true;
+    ++chars[t[i]];
+  }
+
+  //
+  int count = t.size();
+  int l = 0, l_min = 0, min_size = s.size()+1;
+  for(int r=0; r < s.size(); r++){
+    if(flags[s[r]]){
+      if(--chars[s[r]] >= 0){
+        count--;
+      }
+
+      // Try to move the left_bored
+      while( count == 0 ){
+        if(r - l + 1 < min_size){
+          min_size = r-l+1;
+          l_min = l;
+        }
+
+        if(flags[s[l]] && ++chars[s[l]] > 0){
+          count++;
+        }
+
+        l++;
+      }
+    }
+  }
+  return min_size > s.size() ? "" : s.substr(l_min, min_size);
+}
+
+
+
+
+

@@ -75,6 +75,61 @@ string minWindow(string s, string t){
 }
 
 
+// 633. Sum of Square Numbers
+// bool judgeSquareSum_V1(int c){
+//   if( c < 6 && c != 3 ){
+//     return true;
+//   }
+//   double l, r;
+//   l = 0;
+//   r = c >> 1;
+//   while( l <= r ){
+//     if( l*l + r*r > c )
+//       r--;
+//     else if( l*l + r*r < c )
+//       l++;
+//     else
+//       return true;
+//   }
+//   return false;
+// }
+bool judgeSquareSum_V2(int c){
+  long l, r;
+  l = 0;
+  r = sqrt(c);
 
+  while( l <= r ){
+    if( l*l + r*r > c )
+      r--;
+    else if( l*l + r*r < c )
+      l++;
+    else
+      return true;
+  }
 
+  return false;
+}
 
+// 680. Vaild Palindrome II
+bool helper(bool life, string s, int left, int right){
+  while( left < right ){
+    if( s[left] == s[right] ){
+      left++;
+      right--;
+    } else {
+      if( life )
+        return helper(false, s, left+1, right) || \
+               helper(false, s, left, right-1);
+      else
+        return false;
+    }
+  }
+  return true;
+}
+bool validPalindrome(string s){
+  return helper(true, s, 0, s.size()-1);
+}
+void test_680(){
+  string s = "cbbcc";
+  printf("%d\n", validPalindrome(s));
+}

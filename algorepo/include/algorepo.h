@@ -11,6 +11,7 @@
 #include<algorithm>
 #include<numeric>
 #include<string>
+#include<cmath>
 
 void pr_vector(std::vector<int>& v);
 void pr_vector_2(std::vector<std::vector<int>>& v);

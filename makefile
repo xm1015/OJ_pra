@@ -10,6 +10,7 @@ ALGO_obj = \
 	$(AL_dir)/doublePointer.o \
 	$(AL_dir)/dp.o \
 	$(AL_dir)/funcs.o \
+	$(AL_dir)/binarySearch.o \
 
 
 all: main.o $(ALGO_obj)
@@ -21,7 +22,7 @@ run: all
 
 
 install:
-	@echo "this should copy .a/.exe/.lib to target-dir, \n we do nothing here :)"
+	@echo "this command should copy .a/.exe/.lib to target-dir, \n we do nothing here :)"
 
 clean:
 	rm -f \

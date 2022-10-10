@@ -16,3 +16,10 @@ void pr_vector_2(vector<vector<int>>& v)
   }
   printf("\n");
 }
+
+void pr_vector_string(vector<string>& s){
+  for(int i=0; i<s.size(); i++){
+    cout<<s[i]<<" ";
+  }
+  printf("\n");
+}

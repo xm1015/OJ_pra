@@ -42,7 +42,7 @@ string minWindow(string s, string t){
   vector<bool> flags(128, false);
 
   // 
-  for(int i=0; i<t.size(); i++){
+  for(int i=0; i<(int)t.size(); i++){
     flags[t[i]] = true;
     ++chars[t[i]];
   }
@@ -50,7 +50,7 @@ string minWindow(string s, string t){
   //
   int count = t.size();
   int l = 0, l_min = 0, min_size = s.size()+1;
-  for(int r=0; r < s.size(); r++){
+  for(int r=0; r < (int)s.size(); r++){
     if(flags[s[r]]){
       if(--chars[s[r]] >= 0){
         count--;
@@ -71,7 +71,7 @@ string minWindow(string s, string t){
       }
     }
   }
-  return min_size > s.size() ? "" : s.substr(l_min, min_size);
+  return min_size > (int)s.size() ? "" : s.substr(l_min, min_size);
 }
 
 
@@ -133,3 +133,50 @@ void test_680(){
   string s = "cbbcc";
   printf("%d\n", validPalindrome(s));
 }
+
+
+// 524. Longest Word in Dictionary through Dleting
+static bool comp_524(string a, string b){
+  if(a.size() == b.size()){
+    int m = a.size();
+    int i = 0;
+    for(; i < m; i++){
+      if(a[i] != b[i])
+        return a[i] < b[i];
+    }
+    return true;
+  }else
+    return a.size() > b.size();
+}
+string findLongestWord(string s, vector<string>& dictionary){
+  sort(dictionary.begin(), dictionary.end(), comp_524);
+  // pr_vector_string(dictionary);
+  for( int i=0; i < (int)dictionary.size(); i++){
+    int j_d, j_s;
+    j_d = j_s = 0;
+    while( j_s < (int)s.size() && j_d < (int)dictionary[i].size()){
+      if(dictionary[i][j_d] == s[j_s])
+        j_d++;
+      j_s++;
+    }
+    if(j_d == (int)dictionary[i].size())
+      return dictionary[i];
+  }
+
+  return "";
+}
+void test_524(){
+  vector<string> dic = {"ale", "apple", "monkey", "plea"};
+  string s = "abpcplea";
+  cout<<findLongestWord(s, dic)<<endl;
+}
+
+
+// 340. Longest Substring with At Most K Distinct Characters
+int lengthOfLongestSubstringKDistinct(string s, int k){
+
+}
+
+
+
+

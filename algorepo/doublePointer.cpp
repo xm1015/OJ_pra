@@ -38,6 +38,18 @@ vector<int> twoSum_V2(vector<int>& numbers, int target){
 
 
 // 88. Merge Sorted Array
+void merge(vector<int>& nums1, int m, vector<int>& nums2, int n){
+  int pos = m-- + n-- - 1;
+  while( m >= 0 && n >= 0 ){
+    nums1[pos--] = nums1[m] > nums2[n] ? nums1[m--] : nums2[n--];
+  }
+  while( n >= 0 ){
+    nums1[pos--] = nums2[n--];
+  }
+}
+
+
+// 142. Linked List Cycle II
 ListNode *detecCycle(ListNode *head){
   ListNode *fast, *slow;
   fast = slow = head;
@@ -58,10 +70,6 @@ ListNode *detecCycle(ListNode *head){
 
   return NULL;
 }
-
-
-// 142. Linked List Cycle II
-
 
 
 // 76. Minimum Window Substring

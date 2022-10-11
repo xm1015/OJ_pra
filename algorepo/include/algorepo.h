@@ -17,4 +17,13 @@ void pr_vector(std::vector<int>& v);
 void pr_vector_2(std::vector<std::vector<int>>& v);
 void pr_vector_string(std::vector<std::string>& s);
 
+// special struct
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode(int x) : val(x), next(NULL) {}
+};
+
+
+
 #endif

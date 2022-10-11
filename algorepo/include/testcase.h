@@ -11,4 +11,7 @@ void test_524();
 // doublePointer.c
 
 
+// binarySearch.cpp
+void test_34();
+
 #endif

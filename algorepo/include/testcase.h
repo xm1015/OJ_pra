@@ -13,5 +13,7 @@ void test_524();
 
 // binarySearch.cpp
 void test_34();
+void test_154();
+
 
 #endif

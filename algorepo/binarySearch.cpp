@@ -95,12 +95,89 @@ void test_34(){
     pr_vector(res);
 }
 
-
-// 81. Search in Rotated Sorted Array II
+// 81. Search in ROtated Sorted Array II
 bool search(vector<int>& nums, int target){
-
+  int left=0, right = nums.size()-1;
+  int mid;
+  while(left <= right){
+    mid = (left + right) >> 1;
+    if(nums[mid] == target)
+      return true;
+    else if(nums[left] == nums[mid]){
+      // in this situation, we can judge which part is non-decreasing
+      // so we just shrink the zone
+      left++;
+    }
+    else if(nums[right] >= nums[mid]){
+      // the right part is non-decreasing
+      if(target > nums[mid] && target <= nums[right])
+        left = mid + 1;
+      else
+        right = mid - 1;
+    }
+    else {
+      // the left part is non-decreasing
+      if(target < nums[mid] && target >= nums[left])
+        right = mid - 1;
+      else
+        left = mid + 1; 
+    }
+  }
+  return false;
 }
 
+
+// 154. Find Minimum in Rotated Sorted Array II
+int findMin_V1(vector<int>& nums){
+  int m, mid;
+  int left = 0, right = nums.size()-1;
+  m = nums[left];
+
+  while(left <= right){
+    mid = (left + right) >> 1;
+    if( nums[left] < nums[right] ){
+      // array is already in non-decreasing
+      m = min(m, nums[left]);
+      break;
+    }
+    else if( nums[mid] == nums[left]){
+      // we can't tell which part is non-decreasing
+      m = min(m, nums[mid]);
+      left++;
+    }
+    else if( nums[left] < nums[mid] ){
+      // left part is non-decreasing
+      left = mid + 1;
+    }
+    else {
+      // right part is non-decreasing
+      m = min(m, nums[mid]);
+      right = mid - 1;
+    }
+  }
+  return m;
+}
+int findMin_V2(vector<int> &nums){
+    int low = 0, high = nums.size()-1;
+    int mid;
+    while(low < high){
+        mid = (low + high) >> 1;
+        if( nums[mid] == nums[high] ){
+            high--;
+        }
+        else if( nums[mid] < nums[high] ){
+            high = mid;
+        }
+        else{
+            low = mid + 1;
+        }
+    }
+    return nums[low];
+}
+void test_154(){
+  vector<int> nums = {2,2,2,0,1};
+  //findMin(nums);
+}
 
 
 

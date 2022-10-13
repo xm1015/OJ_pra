@@ -179,5 +179,41 @@ void test_154(){
   //findMin(nums);
 }
 
+// 540. Single Element in a Sorted Array
+int singleNonDuplicate_V1(vector<int>& nums){
+  int k = nums[0];
+  for(int i = 1; i < (int)nums.size(); i++){
+    k ^= nums[i];
+  }
+  return k;
+}
+int singleNonDuplicate_V2(vector<int>& nums){
+  int left = 0, right = nums.size()-1;
+  int mid;
+  while( left < right ){
+    mid = (left + right) >> 1;
 
+    // longer one, but easy understanding
+    // if( (mid % 2 == 0 && nums[mid] == nums[mid+1]) || \
+    //     (mid % 2 == 1 && nums[mid] == nums[mid-1]) ){
+    //   left = mid + 1;
+    // }
+    // else {
+    //   right = mid;
+    // }
+
+    // shorter one, but hard understanding
+    if( nums[mid] == nums[mid ^ 1] )
+      left = mid + 1;
+    else 
+      right = mid;
+
+  }
+
+  return nums[left];
+}
+void test_540(){
+  vector<int> nums= {2,2,3,3,7,7,10,11,11};
+  // cout<<singleNonDuplicate(nums)<<endl;
+}
 

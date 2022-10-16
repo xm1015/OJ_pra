@@ -217,3 +217,33 @@ void test_540(){
   // cout<<singleNonDuplicate(nums)<<endl;
 }
 
+
+// 4. Median of Two Sorted Arrays
+// double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2){
+//   if( nums1.size() > nums2.size() )
+//     return findMedianSortedArrays(nums2, nums1);
+  
+//   int k = (nums1.size() + nums2.size() + 1) >> 1;
+
+//   int left = 0;
+//   int right = nums1.size();
+
+//   int mid_1, mid_2;
+//   while( left < right ){
+//     mid_1 = (left + right) >> 1;
+//     mid_2 = k - mid_1;
+
+//     if( nums1[mid_1] < nums2[mid_2-1])
+//       left = mid_1 + 1;
+//     else
+//       right = mid_1;
+//   }
+
+//   mid_1 = left;
+//   mid_2 = k - left;
+//   int c1 = max( mid_1 <= 0 ? INT_MIN : nums1[m1-1], \
+//     )
+// }
+
+
+

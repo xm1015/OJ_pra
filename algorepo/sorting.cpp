@@ -25,6 +25,33 @@ void quicksort(vector<int>& nums, int left, int right){
   quicksort(nums, l, left-1);
   quicksort(nums, left+1, r);
 }
+
+// Mergesort 归并排序
+void merge_sort(vector<int>& nums, int left, int right, vector<int>& temp){
+  if( left + 1 >= right)
+    return;
+  
+  // divide
+  int mid = (right + left) >> 1;
+  merge_sort(nums, left, mid, temp);
+  merge_sort(nums, mid, right, temp);
+
+  // conquer
+  int p = left, q = mid, i = left;
+  while(p < mid || q < right){
+    if(q >= right || (p < mid && nums[p] <= nums[q])){
+      temp[i++] = nums[p++];
+    } else {
+      temp[i++] = nums[q++];
+    }
+  }
+
+  for(i = left; i < right; i++){
+    nums[i] = temp[i];
+  }
+}
+
+
 vector<int> sortArray(vector<int>& nums)
 {
 

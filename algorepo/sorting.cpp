@@ -51,6 +51,43 @@ void merge_sort(vector<int>& nums, int left, int right, vector<int>& temp){
   }
 }
 
+// Insertsort 插入排序
+void insertion_sort(vector<int>& nums){
+  for( int i = 0; i < nums.size(); i++){
+    for( int j = i; j > 0 && nums[j] < nums[j-1]; j--)
+      swap(nums[j], nums[j-1]);
+  }
+}
+
+// Bubblesort 冒泡排序
+void bubble_sort(vector<int>& nums){
+  bool swapped;
+  for( int i = nums.size(); i > 0; i--){
+    swapped = false;
+    for( int j = 0; j < i-1; j++){
+      if( nums[j] > nums[j+1]){
+        swap(nums[j], nums[j+1]);
+        swapped = true;
+      }
+    }
+    if(!swapped)
+      break;
+  }
+}
+
+// Selectionsort 选择排序
+void selection_sort(vector<int>& nums){
+  int min;
+  for(int i = 0; i < nums.size()-1; i++){
+    min = i;
+    for( int j = i+1; j < nums.size(); j++){
+      if( nums[j] < nums[min] )
+        min = j;
+    }
+    swap(nums[i], nums[min]);
+  }
+}
+
 
 vector<int> sortArray(vector<int>& nums)
 {

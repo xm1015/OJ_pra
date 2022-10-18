@@ -16,5 +16,8 @@ void test_34();
 void test_154();
 void test_540();
 
+// sorting.cpp
+void test_215();
+
 
 #endif

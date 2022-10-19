@@ -156,3 +156,38 @@ void test_215()
   vector<int> nums = {3,2,1,5,6,4};
   cout<<"Kth: "<<findKthLargest(nums, 2)<<endl;
 }
+
+
+// 347. Top K Frequent Elements
+vector<int> topKFrequent(vector<int>& nums, int k)
+{
+  unordered_map<int, int> counts;  // Bucket<order:number, value:frequncy>
+  int max_count = 0;
+  for( const int & num : nums ){
+    max_count = max(max_count, ++counts[num]);
+  }
+
+  vector<vector<int>> fre_order(max_count + 1);  // Bucket<order:frequncy, value:number>
+  for( const auto & p : counts){
+    fre_order[p.second].push_back(p.first);
+  }
+
+  vector<int> res;
+  for( int i = max_count; i >= 0 && res.size() < k; i-- ){
+    for( const auto & num : fre_order[i] ){
+      res.push_back(num);
+      if( res.size() == k )
+        break;
+    }
+  }
+  return res;
+}
+
+
+// 451. Sort Characters By Frequency
+
+
+
+
+
+

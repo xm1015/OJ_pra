@@ -19,5 +19,7 @@ void test_540();
 // sorting.cpp
 void test_215();
 
+// bitOperation.cpp
+void test_190();
 
 #endif

@@ -8,6 +8,7 @@ CPPFLAGS = -Wall -g
 ALGO_obj = \
 	$(AL_dir)/funcs.o \
 	$(AL_dir)/sorting.o \
+	$(AL_dir)/bitOperation.o \
 
 
 all: main.o $(ALGO_obj)

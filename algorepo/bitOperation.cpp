@@ -39,3 +39,27 @@ uint32_t reverseBits_V1(uint32_t n)
     }
     return res;
 }
+
+
+// 342. Power of Four
+bool isPowerOfFour_V1(int n)
+{
+    int mask = 0b10101010101010101010101010101010;
+    return n > 0 && !(n & (n-1)) && !(n & mask);
+}
+bool isPowerOfFour_V2(int n)
+{
+    // what the fuck???
+    return n > 0 && !(n & (n-1)) && !((n - 1) % 3);
+}
+
+
+// 136. Single Number
+int singleNumber(vector<int>& nums)
+{
+    int res = nums[0];
+    for( int i = 1; i < nums.size(); i++) {
+        res ^= nums[i];
+    }
+    return res;
+}

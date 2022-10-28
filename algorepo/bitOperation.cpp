@@ -63,3 +63,46 @@ int singleNumber(vector<int>& nums)
     }
     return res;
 }
+
+// 338. Counting Bits
+vector<int> countBits_V1(int n)
+{
+    vector<int> dp(n+1, 0);
+    for(int i = 0; i <= n; i++){
+        dp[i] = i & 1 ? dp[i-1]+1 : dp[i>>1];
+    }
+    return dp;
+}
+vector<int> countBit_V2(int n)
+{
+    // it just based on the fact that i and i>>1 share the common head
+    vector<int> dp(n+1, 0);
+    for(int i=1; i <= n; i++){
+        dp[i] = dp[i>>1] + (i & 1);
+    }
+    return dp;
+}
+
+
+// 318. Maximum Product of Word Lengths
+int maxProduct(vector<string>& words)
+{
+    unordered_map<int, int> hash_str;
+    int max_prd = 0, mask = 0;
+    for(const string & s : words){
+        mask = 0;
+        int now_size = s.size();
+        for(const char & c : s)
+            mask |= (1 << (c - 'a'));
+
+        hash_str[mask] = max(hash_str[mask], now_size);
+
+        for( const auto & pair : hash_str ){
+            if((pair.first & mask) == 0){
+                max_prd = max(max_prd, pair.second * now_size);
+            }
+        }
+    }
+
+    return max_prd;
+}

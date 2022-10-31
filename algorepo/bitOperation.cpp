@@ -106,3 +106,34 @@ int maxProduct(vector<string>& words)
 
     return max_prd;
 }
+
+
+// 268. Missing Number
+int missingNumber(vector<int>& nums)
+{
+    int all = 0, total = nums.size();
+    for(int i = 1; i <= total; i++){
+        all ^= i;
+        all ^= nums[i-1];
+    }
+    return all;
+}
+
+
+// 693. Binary Number with Alternatin Bits
+bool hasAlternatingBits(int n)
+{
+    if( n & 1 )
+        n >>= 1;
+
+    while( n > 0 ){
+        if( (n & 3) == 2 ){
+            n >>= 2;
+            continue;
+        } else {
+            return false;
+        }
+    }
+
+    return true;
+}

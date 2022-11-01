@@ -137,3 +137,64 @@ bool hasAlternatingBits(int n)
 
     return true;
 }
+
+
+// 476. Number Complement
+int findComplement_V1(int num)
+{
+    int bc = 0;
+    int temp = num;
+    while(num){
+        bc++;
+        num >>= 1;
+    }
+    return num ^ ((1L << bc) - 1);
+}
+int findCoplement_V2(int num)
+{
+    unsigned int mask = ~0;
+    while( num & mask )
+        mask <<= 1;
+    return num ^ ~mask;
+}
+
+// 260. Single Number III
+vector<int> singleNumber_V1(vector<int>& nums)
+{
+    int aXORb = 0;
+    for( const int i : nums)
+        aXORb ^= i;
+    
+    unsigned int diffBit = 1;
+    while((aXORb & diffBit) == 0)
+        diffBit <<= 1;
+
+    int a=0, b=0;
+    for( const int m : nums){
+        if(m & diffBit)
+            a ^= m;
+        else
+            b ^= m;
+    }
+
+    return vector<int>{a, b};
+}
+vector<int> singleNumber_V2(vector<int>& nums)
+{
+    // 注意！这里的aXORb如果用int，在后面减1时可能会溢出！！！
+    long aXORb = 0;
+    for( const int i : nums)
+        aXORb ^= i;
+    
+    unsigned int diffBit = (aXORb & (aXORb - 1)) ^ aXORb;
+
+    int a=0, b=0;
+    for( const int m : nums){
+        if(m & diffBit)
+            a ^= m;
+        else
+            b ^= m;
+    }
+
+    return vector<int>{a, b};
+}

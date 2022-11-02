@@ -3,3 +3,37 @@
 using namespace std;
 
 // 695. Max Area of Island
+int helper_695(vector<vector<int>>& grid, int i, int j){
+
+  if(grid[i][j] == 0)
+    return 0;
+
+  grid[i][j] = 0;
+  int dire[5] = {-1, 0, 1, 0, -1};
+  int area = 1;
+  int x, y;
+  for(int n = 0; n < 4; n++){
+    x = i + dire[n];
+    y = j + dire[n+1];
+    if(x >= 0 && x < grid.size() && \
+       y >= 0 && y < grid[0].size() && \
+       grid[x][y] == 1){
+      area += helper_695(grid, x, y);
+    }
+  }
+
+  return area;
+}
+int maxAreaOfIsland(vector<vector<int>>& grid)
+{
+  if(grid.empty() || grid[0].empty()) return 0;
+  int max_area = 0;
+  for( int i = 0; i < grid.size(); i++){
+    for( int j = 0; j < grid[0].size(); j++){
+      if(grid[i][j] == 1){
+        max_area = max(max_area, helper_695(grid, i, j));
+      }
+    }
+  }
+  return max_area;
+}

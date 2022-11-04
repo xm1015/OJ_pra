@@ -37,3 +37,32 @@ int maxAreaOfIsland(vector<vector<int>>& grid)
   }
   return max_area;
 }
+
+
+// 547. Friend Circles
+void helper_547(vector<vector<int>>& map, int ck){
+  if(map[ck][ck] == 0)
+    return;
+
+  map[ck][ck] = 0;
+
+  for(int i = 0; i < map.size(); i++){
+    if(map[ck][i] == 1)
+      helper_547(map, i);
+  }
+}
+int findCircleNum(vector<vector<int>>& isConnected)
+{
+  int pro_num = 0;
+  int city_num = isConnected.size();
+
+  for(int i = 0; i < city_num; i++){
+    if(isConnected[i][i] == 0)
+      continue;
+
+    pro_num++;
+    helper_547(isConnected, i);
+  }
+
+  return pro_num;
+}

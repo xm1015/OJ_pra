@@ -3,9 +3,9 @@
 using namespace std;
 
 // 204. Count Primes
-int countPrimes(int n)
+int countPrimes_V1(int n)
 {
-  if( n < 2 )
+  if( n <= 2 )
     return 0;
 
   vector<bool> prime(n, true);
@@ -13,7 +13,33 @@ int countPrimes(int n)
 
   for( int i = 2; i <= n; i++){
     if(prime[i]){
-      
+      for( int j = i * 2; j < n; j += i){  // find all multipule of 'i'
+        if(prime[j]){
+          prime[j] = false;
+          count--;
+        }
+      }
     }
   }
+
+  return count;
+}
+
+int countPrimes_V2(int n)
+{
+  if(n < 2)
+    return 0;
+
+  vector<bool> isPrime(n, true);
+  int count = 0;
+  for(int i = 2; i < n; i++){
+    if(isPrime[i] == false) continue;
+
+    count++;
+    for(long j = (long)i * i; j < n; j += i){
+      isPrime[j] = false;
+    }
+  }
+
+  return count;
 }

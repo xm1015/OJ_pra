@@ -44,3 +44,35 @@ int countPrimes_V2(int n)
 
   return count;
 }
+
+
+// 504. Base 7
+string convertToBase7(int num)
+{
+  int x = abs(num);
+  int b;
+  string res = "";
+
+  do{
+    b = x % 7;
+    res = to_string(b) + res;
+    x = x / 7;
+  }while(x);
+
+  if(num < 0)
+    res = "-" + res;
+
+  return res;
+}
+
+
+// 172. Factorial Trailing Zeroes
+int trailingZeroes(int n)
+{
+  int res = 0;
+  for(int i = 5; (n/i) > 0; i *= 5){
+    res += (n/i);
+  }
+  return res;
+}
+

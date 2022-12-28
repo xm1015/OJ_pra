@@ -147,4 +147,15 @@ string addStrings_V2(string num1, string num2)
 }
 
 
-// 326. 
+// 326. Power of Three
+bool isPowerOfThree_V1(int n)
+{
+  return n > 0 && 1162261467 % n == 0;
+}
+bool isPowerOfThree_V2(int n)
+{
+  return fmod(log10(n) / log10(3), 1) == 0;
+}
+
+
+// 384. Shuffle an Array

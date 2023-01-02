@@ -159,3 +159,41 @@ bool isPowerOfThree_V2(int n)
 
 
 // 384. Shuffle an Array
+class Solution1 {
+  vector<int> origin;
+public:
+  Solution1(vector<int>& nums): origin(std::move(nums)){}
+
+  vector<int> reset() {
+    return origin;
+  }
+
+  vector<int> shuffle() {
+    if(origin.empty())
+      return {};
+
+    vector<int> shuffled(origin);
+    int n = origin.size();
+    for( int i = n - 1; i >= 0; --i) {
+      swap(shuffled[i], shuffled[rand() % (i+1)]);
+    }
+
+    return shuffled;
+  }
+};
+
+
+// 528. Random Pick with Weight
+class Solution2 {
+  vector<int> weight_sum;
+public:
+  Solution2(vector<int>& w): weight_sum(std::move(w)) {
+    partial_sum(weight_sum.begin(), weight_sum.end(), weight_sum.begin());
+  }
+
+  int pickIndex() {
+    int pos = (rand() % weight_sum[weight_sum.size() - 1]) + 1;  // Attention, pos's range is 1~S, not 0~S-1
+    return lower_bound(weight_sum.begin(), weight_sum.end(), pos) - weight_sum.begin();
+  }
+
+};

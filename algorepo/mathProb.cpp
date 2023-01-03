@@ -159,10 +159,10 @@ bool isPowerOfThree_V2(int n)
 
 
 // 384. Shuffle an Array
-class Solution1 {
+class Solution_384 {
   vector<int> origin;
 public:
-  Solution1(vector<int>& nums): origin(std::move(nums)){}
+  Solution_384(vector<int>& nums): origin(std::move(nums)){}
 
   vector<int> reset() {
     return origin;
@@ -184,10 +184,10 @@ public:
 
 
 // 528. Random Pick with Weight
-class Solution2 {
+class Solution_528 {
   vector<int> weight_sum;
 public:
-  Solution2(vector<int>& w): weight_sum(std::move(w)) {
+  Solution_528(vector<int>& w): weight_sum(std::move(w)) {
     partial_sum(weight_sum.begin(), weight_sum.end(), weight_sum.begin());
   }
 
@@ -196,4 +196,29 @@ public:
     return lower_bound(weight_sum.begin(), weight_sum.end(), pos) - weight_sum.begin();
   }
 
+};
+
+
+// 382. Linked List Random Node
+class Solution_382 {
+  int len;
+  ListNode* head_a;
+public:
+  Solution_382(ListNode* head) {
+    len = 0;
+    head_a = head;
+    while(head){
+      len++;
+      head = head->next;
+    }
+  }
+
+  int getRandom() {
+    long pos = rand() % len;
+    ListNode* temp = head_a;
+    while(pos--){
+      temp = temp->next;
+    }
+    return temp->val;
+  }
 };

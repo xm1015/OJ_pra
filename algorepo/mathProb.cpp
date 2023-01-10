@@ -200,11 +200,11 @@ public:
 
 
 // 382. Linked List Random Node
-class Solution_382 {
+class Solution_382_V1 {
   int len;
   ListNode* head_a;
 public:
-  Solution_382(ListNode* head) {
+  Solution_382_V1(ListNode* head) {
     len = 0;
     head_a = head;
     while(head){
@@ -220,5 +220,27 @@ public:
       temp = temp->next;
     }
     return temp->val;
+  }
+};
+
+class Sulotion_382_V2 {
+  ListNode* head;
+public:
+  Sulotion_382_V2(ListNode* head): head(head) {}
+
+  int getRandom() {
+    int res = head->val;
+    ListNode* node = head->next;
+
+    int i = 2;
+    while(node){
+      if( rand() % i == 0 ){
+        res = node->val;
+      }
+      i++;
+      node = node->next;
+    }
+
+    return res;
   }
 };

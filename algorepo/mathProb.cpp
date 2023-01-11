@@ -244,3 +244,56 @@ public:
     return res;
   }
 };
+
+
+// 168. Excel Sheet Column Title
+string convertToTitle(int columnNumber) 
+{
+  int index;
+  string res;
+  while(columnNumber--) {
+    index = columnNumber % 26;
+    columnNumber /= 26;
+    res.insert(res.begin(), (char)('A'+index));
+  }
+  
+  return res;
+}
+
+
+// 67. Add Binary
+string addBinary(string a, string b) {
+  reverse(a.begin(), a.end());
+  reverse(b.begin(), b.end());
+
+  int a_len = a.size(), b_len = b.size();
+
+  // Make sure a.len >= b.len
+  if(a_len < b_len) {
+    swap(a, b);
+    swap(a_len, b_len);
+  }
+
+  string res;
+  int pa = 0, pb = 0;
+  int temp, t_sum, addbit = 0;
+
+  while( pb < b_len  && pa < a_len ) {
+    t_sum = (a[pa++] + b[pb++] - '0' * 2);
+    temp = (t_sum + addbit) % 2;
+    addbit = (t_sum + addbit) / 2;
+    res.push_back('0'+ temp);
+  }
+  while( pa < a_len ){
+    t_sum = a[pa++] - '0';
+    temp = (t_sum + addbit ) % 2;
+    addbit = (t_sum + addbit) / 2;
+    res.push_back('0' + temp);
+  }
+
+  if(addbit)
+    res.push_back('1');
+
+  reverse(res.begin(), res.end());
+  return res;
+}

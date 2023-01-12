@@ -297,3 +297,76 @@ string addBinary(string a, string b) {
   reverse(res.begin(), res.end());
   return res;
 }
+
+
+// 238. Product of Array Except Self
+vector<int> productExceptSelf_V1(vector<int>& nums)  // Excceed limited time
+{
+  vector<int> res;
+  vector<long> prefix(1,1), suffix(1,1);
+  int len = nums.size();
+
+  for(int i = 1; i < len; i++) {
+    prefix.insert(prefix.end(), prefix[i-1] * (long)nums[i-1]);
+    suffix.insert(suffix.begin(), suffix[0] * (long)nums[len-i]);
+  }
+
+  for(int i = 0; i < len; i++) {
+    res.push_back(prefix[i] * suffix[i]);
+  }
+
+  return res;
+}
+vector<int> productExceptSelf_V2(vector<int>& nums)
+{
+  int len = nums.size();
+  vector<int> res(len, 1);
+  int prefix_product = 1, suffix_product = 1;
+
+  for(int i = 1; i < len; i++) {
+    prefix_product *= nums[i-1];
+    suffix_product *= nums[len-i];
+
+    res[i] *= prefix_product;
+    res[len-i-1] *= suffix_product;
+  }
+
+  return res;
+}
+
+
+// 462. Minimum Moves to Equal Array Elements II
+int minMoves2_V1(vector<int>& nums)
+{
+  int len = nums.size();
+  vector<long> aver(len, 0);
+
+  sort(nums.begin(), nums.end());
+
+  long prefix_sum = 0, suffix_sum = 0;
+
+  for(int i = 1; i < len; i++) {
+    prefix_sum += nums[i-1];
+    suffix_sum += nums[len-i];
+    aver[i] += i * (long)nums[i] - prefix_sum;
+    aver[len-i-1] += suffix_sum - i * (long)nums[len-i-1];
+  }
+
+  return (int)*min_element(aver.begin(), aver.end());
+}
+int minMoves2_V2(vector<int>& nums)
+{
+  // A fact is: median number is always the best choic for this situation
+  int len = nums.size();
+  int res = 0;
+
+  // Instead of sorting whole array, just find the median pole is faster
+  nth_element(nums.begin(), nums.begin()+len/2, nums.end());
+  int median = nums[len/2];
+
+  for(int i = 0; i < len; i++) {
+    res += abs(median - nums[i]); 
+  }
+
+  return res;
+}
